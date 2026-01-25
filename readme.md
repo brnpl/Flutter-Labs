@@ -44,7 +44,7 @@ $ tree
 - [chall2](./chall2/): Release Mode - Finding Hardcoded Secrets
 - [chall3](./chall3/): Release Mode - Hooking with Frida 1 (read return value)
 - [chall4](./chall4/): Release Mode - Hooking with Frida 2 (change return value)
-- [chall5](./chall5/): Release Mode - Reversing Native (Java) Code
+- [chall5](./chall5/): Release Mode - Reversing Platform (Java) Code
 - [chall6](./chall6/): Release Mode - Intercepting HTTPS Traffic
 - [chall7](./chall7/): Release Mode - Bypassing Integrity Checks for Traffic Interception
 - [chall8](./chall8/): Release Mode - Bypassing SSL Pinning
