@@ -1,1 +1,1 @@
-FLAG{hooking_native_code}
+FLAG{hooking_platform_code}
