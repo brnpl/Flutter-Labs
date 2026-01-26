@@ -1,5 +1,7 @@
 # Challenge 0: Introduction to Flutter
-Welcome to Flutter Labs! Before diving into the challenges, it's essential to understand what Flutter is and how it works.
+Welcome to Flutter Labs! Before diving into the challenges, it's important to understand what Flutter is and how it works. 
+
+**This section is not tied to a specific challenge or APK to solve; its sole purpose is to introduce Flutter and provide the foundational knowledge needed to get started.**
 
 ## What is Flutter?
 Flutter is Google's open-source UI framework for building **natively compiled applications** for mobile, web, and desktop from a single codebase. Released in 2017 and reaching stable version 1.0 in December 2018, Flutter has rapidly gained popularity across the developer community.
@@ -100,6 +102,8 @@ $ frida-ps -U
 Starting from [chall6](../chall6/), intercepting and analyzing HTTPS traffic becomes necessary.
 
 The basic setup involves installing Burp Suite on your computer, configuring your Android device to use Burp as a proxy, and installing Burp's CA certificate on your Android device. Detailed instructions for setting up Burp Suite with Android can be found in the [PortSwigger Blog Post](https://portswigger.net/burp/documentation/desktop/mobile/config-android-device).
+
+Ensure that no firewall rules or network restrictions are blocking traffic between your computer and the Android device, as this will prevent Burp from intercepting the requests.
 
 ### Why Flutter Reverse Engineering Matters
 As Flutter continues to grow in popularity, more applications, including those handling sensitive data, are being built with this framework. Understanding how to analyze Flutter applications is becoming an essential skill for security researchers identifying vulnerabilities, penetration testers assessing mobile app security and bug bounty hunters finding security issues.
