@@ -208,40 +208,32 @@ This file contains detailed information about every Dart object in the applicati
 
 
 #### Approach B: Understand the code logic
-Open `asm/chall2/main.dart` and read through the reconstructed code. When you find a line that loads an object from the object pool, note the reference number. Then search for that reference in `pp.txt` to see what it points to.
+Open `asm/chall2/main.dart` and read through the reconstructed code. When reverse engineering Dart applications, you'll often see assembly instructions that load objects from the "object pool" (`pp.txt`).
+
+Consider this instruction from disassembled code:
 ```asm
 ...
-class MyApp extends StatelessWidget {
-
-  _ build(/* No info */) {
-    // ** addr: 0x2194f4, size: 0xa4
-    // 0x2194f4: EnterFrame
-    //     0x2194f4: stp             fp, lr, [SP, #-0x10]!
-    //     0x2194f8: mov             fp, SP
-    // 0x2194fc: AllocStack(0x10)
-    //     0x2194fc: sub             SP, SP, #0x10
-    // 0x219500: CheckStackOverflow
-    //     0x219500: ldr             x16, [THR, #0x38]  ; THR::stack_limit
-    //     0x219504: cmp             SP, x16
-    //     0x219508: b.ls            #0x219590
-    // 0x21950c: r16 = Instance_MaterialColor
-    //     0x21950c: ldr             x16, [PP, #0x6e48]  ; [pp+0x6e48] Obj!MaterialColor@3affd1
-    // 0x219510: str             x16, [SP]
-    // 0x219514: r1 = Null
-    //     0x219514: mov             x1, NULL
-    // 0x219518: r4 = const [0, 0x2, 0x1, 0x1, primarySwatch, 0x1, null]
-    //     0x219518: ldr             x4, [PP, #0x6e50]  ; [pp+0x6e50] List(7) [0, 0x2, 0x1, 0x1, "primarySwatch", 0x1, Null]
-    // 0x21951c: r0 = ThemeData()
-    //     0x21951c: bl              #0x16fb60  ; [package:flutter/src/material/theme_data.dart] ThemeData::ThemeData
-    // 0x219520: stur            x0, [fp, #-8]
-    // 0x219524: r0 = MaterialApp()
-    //     0x219524: bl              #0x219598  ; AllocateMaterialAppStub -> MaterialApp (size=0x9c)
-    // 0x219528: r1 = Instance_HomePage
-    //     0x219528: ldr             x1, [PP, #0x6e58]  ; [pp+0x6e58] Obj!HomePage@3ae831
-    // 0x21952c: StoreField: r0->field_13 = r1
-    //     0x21952c: stur            w1, [x0, #0x13]
+// 0x219528: r1 = Instance_HomePage
+//     0x219528: ldr             x1, [PP, #0x6e58]  ; [pp+0x6e58] Obj!HomePage@3ae831
 ...
 ```
+**The Three Key Parts**
+- `ldr` (Load Register) - This ARM assembly instruction copies data from memory into a CPU register;
+- `PP` (Pool Pointer) - A special register that points to the object pool, which is where Dart stores all constant values like strings, numbers, and pre-built objects;
+- `#0x6e58` (Offset) - The location in the pool where the object lives;
+
+The instruction calculates `PP + 0x6e58`, reads that memory location, and loads whatever object is there into register `x1`.
+
+To find out what's actually being loaded search in `pp.txt` for `0x6e58` and you'll find (line 7673 in the screenshot):
+```
+...
+[pp+0x6e58] Obj!HomePage@3ae5f1 : {
+    off _c: "FLAG{hardcoded_secret}"
+}
+...
+```
+
+This reveals that the instruction loads a HomePage instance containing the hardcoded secret string.
 
 The image below illustrates the flow from the original source code to the decompiled output, showing how the source is mapped into compiled code. It includes `main.dart`, the assembly obtained with asm, and references to the loaded object pool.
 
