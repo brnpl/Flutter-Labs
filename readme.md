@@ -1,4 +1,4 @@
-# Flutter Labs
+# Flutter Reverse Engineering Labs
 This repository contains a series of progressive challenges designed to introduce the reverse engineering of Flutter applications. Since there aren't many blog posts or tutorials that explain Flutter reversing in detail, I decided to create this repo as a hands-on way to fill that gap.
 
 The goal is to build a solid foundation for understanding the unique characteristics of the Flutter framework and the analysis techniques commonly used with it.
@@ -77,8 +77,6 @@ Tools:
 - [Intercept Flutter traffic on iOS and Android (HTTP/HTTPS/Dio Pinning)​](https://blog.nviso.eu/2022/08/18/intercept-flutter-traffic-on-ios-and-android-http-https-dio-pinning/)
 - [Blog frida-flutterproxy](https://hackcatml.tistory.com/197)
 - [Intercepting HTTPS Communication in Flutter](https://sensepost.com/blog/2025/intercepting-https-communication-in-flutter-going-full-hardcore-mode-with-frida/)
-
-
 
 ## 📝 License
 This project is distributed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
