@@ -48,6 +48,7 @@ $ tree
 - [chall6](./chall6/): Release Mode - Intercepting HTTPS Traffic
 - [chall7](./chall7/): Release Mode - Bypassing Integrity Checks for Traffic Interception
 - [chall8](./chall8/): Release Mode - Bypassing SSL Pinning
+- [chall9](./chall9/): Release Mode - Hooking Flutter Third-Party Library
 
 ## 🛠️ Tools Used
 Some of these tools require specific configurations. To simplify setup and ensure reproducibility, Dockerfiles are provided for some of these tools and can be found in the `/tools` directory.
